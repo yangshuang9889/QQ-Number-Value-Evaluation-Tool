@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>源码猫QQ评估软件网页版</title>
+    <meta name="keywords" content="QQ评估软件网页版,QQ价值分析,QQ号码评估,专业QQ分析工具">
+    <meta name="description" content="QQ评估软件网页版是一款专业的QQ号码价值分析工具，提供全面的QQ等级、会员信息和价值评估。">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="static/picture/logo.png" alt="QQ评估软件网页版" class="logo-icon">
+                    <h1 class="app-title">源码猫QQ评估软件网页版</h1>
+                </div>
+                <div class="header-input-group">
+                    <input type="text" id="qqInput" class="header-qq-input" placeholder="请输入QQ号码" maxlength="11">
+                    <button class="header-evaluate-btn" id="evaluateBtn">
+                        <span class="btn-text">评估</span>
+                        <span class="header-loading-spinner" id="loadingSpinner"></span>
+                    </button>
+                </div>
+                <div class="header-actions">
+                    <button class="sidebar-toggle-btn" id="sidebarToggleBtn">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="content-wrapper">
+                <section class="results-section" id="resultsSection" style="display: none;">
+                    <div class="results-container">
+                        <div class="results-left">
+                            <div class="profile-card">
+                                <div class="profile-header">
+                                    <div class="avatar-container">
+                                        <img src="static/picture/qq.jpg" alt="QQ头像" class="qq-avatar" id="qqAvatar">
+                                    </div>
+                                    <div class="user-info">
+                                        <h3 class="nickname" id="nickname">-</h3>
+                                        <div class="signature-display">
+                                            <span class="signature-label">签名:</span>
+                                            <span class="signature-value" id="signature">-</span>
+                                        </div>
+                                        <div class="qq-display">
+                                            <span class="qq-label">QQ:</span>
+                                            <span class="qq-value" id="qqDisplay">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level-header">
+                                    <div class="level-info">
+                                        <span class="level-text">QQ等级：</span>
+                                        <span class="level-value" id="levelInfo">-</span>
+                                    </div>
+                                    <div class="level-icons-wrapper">
+                                        <span class="level-icons" id="levelIcons"></span>
+                                    </div>
+                                </div>
+                                <div class="profile-details">
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <div class="info-icon">🆔</div>
+                                            <div class="info-content">
+                                                <div class="info-label">QID</div>
+                                                <div class="info-value" id="qid">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">🎯</div>
+                                            <div class="info-content">
+                                                <div class="info-label">注册时间</div>
+                                                <div class="info-value" id="registerTime">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">📊</div>
+                                            <div class="info-content">
+                                                <div class="info-label">总活跃天数</div>
+                                                <div class="info-value active-days" id="activeDays">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">📅</div>
+                                            <div class="info-content">
+                                                <div class="info-label">升下一级需要</div>
+                                                <div class="info-value" id="nextLevel">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">📈</div>
+                                            <div class="info-content">
+                                                <div class="info-label">全国排名</div>
+                                                <div class="info-value" id="rank">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">💎</div>
+                                            <div class="info-content">
+                                                <div class="info-label">会员等级</div>
+                                                <div class="info-value member-info" id="memberInfo">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">🎖️</div>
+                                            <div class="info-content">
+                                                <div class="info-label">达人天数</div>
+                                                <div class="info-value" id="masterLevel">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">💻</div>
+                                            <div class="info-content">
+                                                <div class="info-label">PC在线</div>
+                                                <div class="info-value" id="pcOnline">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon">📱</div>
+                                            <div class="info-content">
+                                                <div class="info-label">手机在线</div>
+                                                <div class="info-value" id="mobileOnline">-</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-right">
+                            <div class="privileges-card">
+                                <div class="privileges-grid" id="privilegesGrid">
+                                </div>
+                            </div>
+                            <div class="analysis-card">
+                                <div class="analysis-content">
+                                    <table class="analysis-table">
+                                        <thead>
+                                            <tr>
+                                                <th>分析项目</th>
+                                                <th>类型</th>
+                                                <th>分析内容</th>
+                                                <th>估值</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="analysisTableBody">
+                                            <tr>
+                                                <td colspan="4" class="empty-message">请输入QQ号码进行评估</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="total-section">
+                                        <img src="static/picture/D.png" alt="评级" class="grade-icon" id="gradeIcon"
+                                            style="display:none;">
+                                        <span class="total-label">最终总估值为：</span>
+                                        <span class="total-value" id="totalPrice">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <h3>作者介绍</h3>
+                    <button class="close-sidebar" id="closeSidebar">×</button>
+                </div>
+                <div class="sidebar-section">
+                    <h4>支持作者</h4>
+                    <div class="appreciation-section">
+                        <div class="wechat-qr">
+                            <img src="static/picture/zsm.png" alt="微信赞赏码" class="qr-code">
+                        </div>
+                        <div class="appreciation-text">
+                            <p class="main-text">觉得本软件还不错的话</p>
+                            <p class="sub-text">微信扫码打赏一下作者</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>联系方式</h4>
+                    <div class="contact-info">
+                        <p class="contact-text">作者QQ：28699219</p>
+                        <p class="contact-text">Copyright© 源码猫</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <script src="js/special-numbers.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
